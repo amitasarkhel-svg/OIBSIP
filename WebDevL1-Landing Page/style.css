@@ -1,0 +1,130 @@
+/* ---------- 1. COLOUR PALETTE & FONTS (change colours here only) ---------- */
+:root {
+  --bg: #f2f5f3;        /* page background (cool off-white) */
+  --bg-alt: #e1ebe7;    /* second section background */
+  --ink: #14302e;       /* main text and dark areas */
+  --teal: #1f6f68;      /* links and borders */
+  --amber: #f2a541;     /* button colour */
+  --heading-font: "Bricolage Grotesque", Arial, sans-serif;
+  --body-font: "Karla", Arial, sans-serif;
+}
+
+/* ---------- 2. RESET: box-sizing stops padding from making boxes wider ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body-font);
+  font-size: 1.125rem;      /* body text size */
+  line-height: 1.6;
+}
+
+/* Headings use the second font and bigger sizes */
+h1, h2, h3, .logo { font-family: var(--heading-font); line-height: 1.15; }
+h1 { font-size: clamp(2.5rem, 7vw, 4.5rem); font-weight: 800; }   /* heading size 1 */
+h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 1.5rem; }
+h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+
+a { color: var(--teal); }
+a:focus-visible, .btn:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
+
+/* ---------- 3. NAVIGATION BAR ---------- */
+.navbar {
+  position: sticky;          /* stays at the top while you scroll */
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;           /* lets links drop to a new line on tiny screens */
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding: 0.9rem 5%;
+  background: var(--ink);
+}
+.logo { color: #fff; font-size: 1.4rem; font-weight: 800; text-decoration: none; }
+.nav-links { display: flex; gap: 1.25rem; list-style: none; }
+.nav-links a { color: #fff; text-decoration: none; font-size: 1rem; }
+.nav-links a:hover { color: var(--amber); }
+
+/* ---------- 4. HERO ---------- */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr;     /* one column on mobile */
+  align-items: center;
+  gap: 2.5rem;
+  padding: 4rem 5%;
+}
+.subheadline { margin: 1.25rem 0 2rem; max-width: 34ch; font-size: 1.25rem; }
+
+.btn {
+  display: inline-block;
+  padding: 0.85rem 1.75rem;
+  background: var(--amber);
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 999px;
+}
+.btn:hover { background: var(--ink); color: #fff; }
+
+/* The coffee cup: rings drawn with a radial gradient */
+.cup {
+  width: 100%;
+  max-width: 340px;
+  aspect-ratio: 1;               /* keeps it a perfect circle */
+  border-radius: 50%;
+  background: radial-gradient(circle closest-side, #4a2a18 0 52%, #b9814f 52% 64%, #fff 64% 93%, #c9d8d3 93% 100%);
+}
+
+/* ---------- 5. CONTENT SECTIONS ---------- */
+.section { padding: 4rem 5%; scroll-margin-top: 4rem; }
+.section > *, .about { max-width: 1100px; margin-left: auto; margin-right: auto; }
+.alt { background: var(--bg-alt); }
+
+/* Features: 1 column on mobile, 3 on desktop */
+.features { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+.features article { border-left: 4px solid var(--teal); padding-left: 1rem; }
+
+/* About: text + facts */
+.about { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+.about p { margin-bottom: 1rem; max-width: 60ch; }
+.facts { display: grid; gap: 1rem; align-content: start; }
+.facts div { border-bottom: 1px solid var(--teal); padding-bottom: 0.5rem; }
+.facts dt { font-size: 0.95rem; }
+.facts dd { font-family: var(--heading-font); font-size: 1.5rem; font-weight: 800; }
+
+/* Testimonials */
+.reviews { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+blockquote { background: #fff; padding: 1.5rem; border-radius: 12px; border-top: 4px solid var(--amber); }
+blockquote footer { margin-top: 1rem; font-weight: 700; color: var(--teal); }
+
+/* ---------- 6. FOOTER ---------- */
+.footer {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  padding: 3rem 5% 2rem;
+  background: var(--ink);
+  color: #fff;
+  scroll-margin-top: 4rem;
+}
+.footer-title { font-family: var(--heading-font); font-weight: 800; font-size: 1.25rem; margin-bottom: 0.5rem; }
+.social { display: flex; flex-wrap: wrap; gap: 1rem; list-style: none; }
+.footer a { color: var(--amber); }
+.copy { font-size: 0.9rem; opacity: 0.8; }
+
+/* ---------- 7. DESKTOP LAYOUT (screens 800px and wider) ---------- */
+@media (min-width: 800px) {
+  .hero { grid-template-columns: 1.3fr 1fr; padding: 6rem max(5%, calc((100% - 1100px) / 2)); }
+  .features, .reviews { grid-template-columns: repeat(3, 1fr); }
+  .about { grid-template-columns: 2fr 1fr; gap: 4rem; }
+  .footer { grid-template-columns: 1fr 1fr; padding-left: max(5%, calc((100% - 1100px) / 2)); padding-right: max(5%, calc((100% - 1100px) / 2)); }
+  .copy { grid-column: 1 / -1; }
+  .social { justify-content: flex-end; align-items: flex-start; }
+}
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
